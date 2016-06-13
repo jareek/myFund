@@ -70,6 +70,7 @@
                 Height="80"
                 Margin="120,0,-4,-4"
                 HorizontalAlignment="Left"
+                Command="{Binding AddStockCommand}"
                 Padding="10"
                 Style="{DynamicResource MetroCircleButtonStyle}"
                 ToolTip="Add Equity">

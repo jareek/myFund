@@ -103,6 +103,10 @@
       <Project>{e30e9b77-0f45-4f60-b2ae-599d054671c3}</Project>
       <Name>myFund.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\myFund.Service\myFund.Service.csproj">
+      <Project>{f7db5624-9835-41be-82b5-b120eed5a9f9}</Project>
+      <Name>myFund.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\FundView.xaml">

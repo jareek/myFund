@@ -92,6 +92,7 @@
     <Compile Include="Controls\ModuleItemControl.xaml.cs">
       <DependentUpon>ModuleItemControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Events\StockAddedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ValidatableViewModel.cs" />
     <Compile Include="ViewModels\NavigationItemViewModel.cs" />
@@ -108,6 +109,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\myFund.Common\myFund.Common.csproj">
+      <Project>{e30e9b77-0f45-4f60-b2ae-599d054671c3}</Project>
+      <Name>myFund.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
