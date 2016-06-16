@@ -4,6 +4,7 @@ using myFund.Service.Repository;
 
 namespace myFund.Service.Service
 {
+    // This class is just for a demo purposes. In a real world application proper server side solution should be delivered.
     public class FundService : IFundService
     {
         private readonly IFundRepository fundRepository;

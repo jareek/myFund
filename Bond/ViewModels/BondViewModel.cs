@@ -8,23 +8,25 @@ using myFund.Service.Service;
 using MvvmValidation;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Regions;
 
 namespace Bond.ViewModels
 {
-    public class BondViewModel : ValidatableViewModel
+    public class BondViewModel : ValidatableViewModel, INavigationAware
     {
         private readonly IFundService fundService;
         private readonly IEventAggregator eventAggregator;
-        private readonly Stock stock;
+        private Stock stock;
 
         public BondViewModel(IFundService fundService, IEventAggregator eventAggregator)
         {
             this.stock = new BondStock();
             this.fundService = fundService;
             this.eventAggregator = eventAggregator;
-            this.InitializeCommands();
 
-            this.ConfigureValidationRules();
+            this.InitializeCommands();
+            this.AddValidationRules();
+            this.WireUpEvents();
         }
 
         public ICommand AddStockCommand { get; private set; }
@@ -71,6 +73,20 @@ namespace Bond.ViewModels
 
         public decimal? TransactionCost => this.stock.TransactionCost;
 
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            this.OnPropertyChanged(string.Empty);
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+        }
+
         private void InitializeCommands()
         {
             this.AddStockCommand = new DelegateCommand(this.OnAddStockCommandExecuted);
@@ -87,10 +103,8 @@ namespace Bond.ViewModels
             try
             {
                 var addedStock = await this.fundService.AddStockAsync(this.stock);
-                this.stock.Price = null;
-                this.stock.Quantity = null;
-                this.OnPropertyChanged(nameof(this.Price));
-                this.OnPropertyChanged(nameof(this.Quantity));
+                this.stock = new BondStock();
+                this.OnPropertyChanged(string.Empty);
                 this.eventAggregator.GetEvent<StockAddedEvent>().Publish(addedStock);
             }
             catch (AggregateException ex)
@@ -99,7 +113,7 @@ namespace Bond.ViewModels
             }      
         }
 
-        private void ConfigureValidationRules()
+        private void AddValidationRules()
         {
             this.Validator.AddRequiredRule(() => this.Price, "Price is required");
             this.Validator.AddRule(() => this.Price, () => RuleResult.Assert(this.Price.HasValue && this.Price <= int.MaxValue, "Price is too high"));
@@ -107,6 +121,10 @@ namespace Bond.ViewModels
             this.Validator.AddRequiredRule(() => this.Quantity, "Quantity is required");
             this.Validator.AddRule(() => this.Quantity, () => RuleResult.Assert(this.Quantity.HasValue && this.Quantity <= int.MaxValue, "Quantity is too high"));
             this.Validator.AddRule(() => this.Quantity, () => RuleResult.Assert(this.Quantity.HasValue && this.Quantity >= int.MinValue, "Quantity is too low"));
+        }
+
+        private void WireUpEvents()
+        {
         }
     }
 }

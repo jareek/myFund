@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Style="{StaticResource StockTitleStyle}" Text="{Binding Type}" />
+        <TextBlock Style="{StaticResource TitleStyle}" Text="{Binding Type}" />
         <Grid Grid.Row="1"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch">
@@ -30,23 +30,27 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Margin="0,20,0,20">
                 <TextBlock Style="{StaticResource DefaultPropertyHeaderStyle}" Text="Price" />
-                <controls:NumericUpDown Width="200"
-                                        HorizontalAlignment="Left"
-                                        HasDecimals="True"
-                                        HideUpDownButtons="True"
-                                        Value="{Binding Price,
-                                                        Mode=TwoWay,
-                                                        ValidatesOnDataErrors=True}" />
+                <AdornerDecorator>
+                    <controls:NumericUpDown Width="200"
+                                            HorizontalAlignment="Left"
+                                            HasDecimals="True"
+                                            HideUpDownButtons="True"
+                                            Value="{Binding Price,
+                                                            Mode=TwoWay,
+                                                            ValidatesOnDataErrors=True}" />
+                </AdornerDecorator>
             </StackPanel>
             <StackPanel Grid.Row="1" Margin="0,0,0,20">
                 <TextBlock Style="{StaticResource DefaultPropertyHeaderStyle}" Text="Quantity" />
-                <controls:NumericUpDown Width="200"
-                                        HorizontalAlignment="Left"
-                                        HasDecimals="True"
-                                        HideUpDownButtons="True"
-                                        Value="{Binding Quantity,
-                                                        Mode=TwoWay,
-                                                        ValidatesOnDataErrors=True}" />
+                <AdornerDecorator>
+                    <controls:NumericUpDown Width="200"
+                                            HorizontalAlignment="Left"
+                                            HasDecimals="True"
+                                            HideUpDownButtons="True"
+                                            Value="{Binding Quantity,
+                                                            Mode=TwoWay,
+                                                            ValidatesOnDataErrors=True}" />
+                </AdornerDecorator>
             </StackPanel>
             <StackPanel Grid.Row="2" Margin="0,0,0,20">
                 <TextBlock Style="{StaticResource DefaultPropertyHeaderStyle}" Text="Market Value" />
@@ -54,7 +58,7 @@
                            Style="{StaticResource DefaultPropertyValueStyle}"
                            Text="{Binding MarketValue,
                                           TargetNullValue=N/A,
-                                          StringFormat=N4}" />
+                                          StringFormat=N2}" />
             </StackPanel>
             <StackPanel Grid.Row="3" Margin="0,0,0,20">
                 <TextBlock Style="{StaticResource DefaultPropertyHeaderStyle}" Text="Transaction Cost" />
@@ -62,17 +66,14 @@
                            Style="{StaticResource DefaultPropertyValueStyle}"
                            Text="{Binding TransactionCost,
                                           TargetNullValue=N/A,
-                                          StringFormat=N4}" />
+                                          StringFormat=N2}" />
             </StackPanel>
         </Grid>
         <Button Grid.Row="2"
-                Width="80"
-                Height="80"
                 Margin="120,0,-4,-4"
                 HorizontalAlignment="Left"
                 Command="{Binding AddStockCommand}"
-                Padding="10"
-                Style="{DynamicResource MetroCircleButtonStyle}"
+                Style="{StaticResource DefaultCircleButton}"
                 ToolTip="Add Equity">
             <Path Data="{StaticResource AddIcon}"
                   Fill="{StaticResource DefaultThemeColor}"

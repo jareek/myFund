@@ -8,7 +8,9 @@
         xmlns:platform="clr-namespace:myFund.Common.Platform;assembly=myFund.Common"
         xmlns:regions="http://prismlibrary.com/"
         Title="{Binding Title}"
-        MinWidth="1024"
+        Width="1100"
+        Height="700"
+        MinWidth="1100"
         MinHeight="600"
         regions:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d">
@@ -50,7 +52,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <ContentControl x:Name="MainContent"
-                        Margin="20"
+                        Margin="20,40,20,20"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         regions:RegionManager.RegionName="{x:Static platform:RegionNames.MainContentRegion}"
@@ -59,7 +61,6 @@
               Height="550"
               Margin="0,-504,0,0"
               VerticalAlignment="Top"
-              Background="White"
               RenderTransformOrigin="0.5,0.5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250" />
@@ -70,10 +71,18 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
+            <Border Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Background="White" />
+
             <ItemsControl x:Name="StockNavigationItems"
+                          Grid.Row="0"
+                          Grid.Column="0"
                           Margin="20"
                           regions:RegionManager.RegionName="{x:Static platform:RegionNames.StockNavigationRegion}"
                           IsTabStop="False" />
+
             <Border Grid.Row="0"
                     Grid.Column="0"
                     Width="2"

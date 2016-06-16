@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using myFund.Common.Model;
 
@@ -18,8 +17,15 @@ namespace myFund.Service.Repository
         }
         public Stock AddStock(Stock stock)
         {
-            ////Contract.Requires<InvalidOperationException>(stock != null, "Empty stock could not be added.");
-            ////Contract.Requires<InvalidOperationException>(stock.Type != StockType.None, "Stock has no type.");
+            if (stock == null)
+            {
+                throw new InvalidOperationException("Empty stock could not be added.");
+            }
+
+            if (stock.Type == StockType.None)
+            {
+                throw new InvalidOperationException("Stock has no type.");
+            }
 
             var stockName = this.stockNameResolver.GetStockName(stock, this.fund);
             var stockId = this.fund.Count + 1;
@@ -42,7 +48,7 @@ namespace myFund.Service.Repository
 
         public Fund GetFund()
         {
-            return new Fund
+            var fund = new Fund
             {
                 Stocks = this.fund.Select(stock => new Stock
                 {
@@ -55,6 +61,9 @@ namespace myFund.Service.Repository
                     Tolerance = stock.Tolerance
                 }).ToArray()
             };
+
+            fund.Stocks.AsParallel().ForAll(stock => stock.StockWeight.Calculate(fund));
+            return fund;
         }
     }
 }

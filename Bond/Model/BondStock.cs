@@ -2,14 +2,16 @@
 
 namespace Bond.Model
 {
-    internal class BondStock : Stock
+    public class BondStock : Stock
     {
+        private const decimal FeePercent = 0.02m;
+
         public BondStock()
         {
             this.Type = StockType.Bond;
         }
 
-        public override decimal? TransactionCost => this.MarketValue * 0.02m;
+        public override decimal? TransactionCost => this.MarketValue * FeePercent;
 
         public override decimal Tolerance => 100000m;
     }

@@ -3,15 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mvvm="http://prismlibrary.com/"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
     <Grid x:Name="LayoutRoot"
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
-        <Button Click="OnNavigationItemClick" 
-                Style="{DynamicResource NavigationItemButtonStyle}">
+        <Button Click="OnNavigationItemClick" Style="{StaticResource NavigationItemButtonStyle}">
             <TextBlock Style="{StaticResource NavigationItemNameStyle}" Text="{Binding ModuleName, FallbackValue=Unknown}" />
         </Button>
     </Grid>

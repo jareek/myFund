@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel;
-using System.Threading.Tasks;
 using MvvmValidation;
 using Prism.Mvvm;
 
 namespace myFund.Common.UI.ViewModels
 {
-    public abstract class ValidatableViewModel : BindableBase, IValidatable, IDataErrorInfo
+    public abstract class ValidatableViewModel : BindableBase, IDataErrorInfo
     {
         private bool? isValid;
 
@@ -25,11 +24,6 @@ namespace myFund.Common.UI.ViewModels
 
         protected ValidationHelper Validator { get; private set; }
 
-        Task<ValidationResult> IValidatable.Validate()
-        {
-            return this.Validator.ValidateAllAsync();
-        }
-
         public bool? IsValid
         {
             get { return this.isValid; }
@@ -40,11 +34,10 @@ namespace myFund.Common.UI.ViewModels
             }
         }
 
-        protected async void Validate()
+        protected void Validate()
         {
-            var validationResult = await ((IValidatable) this).Validate();
+            var validationResult = this.Validator.ValidateAll();
             this.IsValid = validationResult.IsValid;
-            this.OnPropertyChanged(string.Empty);
         }
 
         private void WireUpValidationNotification()

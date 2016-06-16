@@ -2,6 +2,11 @@
 {
     public class Stock
     {
+        public Stock()
+        {
+            this.StockWeight = new StockWeight(this);
+        }
+
         public int? Id { get; set; }
 
         public string Name { get; set; }
@@ -16,8 +21,17 @@
 
         public virtual decimal? TransactionCost { get; set; }
 
-        public decimal? StockWeight { get; set; }
+        public StockWeight StockWeight { get; private set; }
 
         public virtual decimal Tolerance { get; set; }
+
+        public bool HasWarning
+        {
+            get
+            {
+                var hasWarning = this.MarketValue.GetValueOrDefault() < 0 || this.TransactionCost > this.Tolerance;
+                return hasWarning;
+            }
+        }
     }
 }

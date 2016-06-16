@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="Fund.Views.FundSummaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Fund.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="SummaryHeaderStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Margin" Value="-2,0,0,0" />
+        </Style>
+
+        <SolidColorBrush x:Key="DefaultSummaryHeaderLabelColor">#FF7F7F7F</SolidColorBrush>
+
+        <Style x:Key="DefaultSummaryHeaderStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="0,0,0,2" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Foreground" Value="{StaticResource DefaultSummaryHeaderLabelColor}" />
+        </Style>
+
+        <Style x:Key="DefaultSummaryValueStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="Margin" Value="0,-8,0,0" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Style="{StaticResource SummaryHeaderStyle}" Text="Equities" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0,0,15,0">
+                    <TextBlock Style="{StaticResource DefaultSummaryHeaderStyle}" Text="Count" />
+                    <TextBlock Style="{StaticResource DefaultSummaryValueStyle}" Text="{Binding TotalEquitiesCount, TargetNullValue=N/A}" />
+                </StackPanel>
+                <StackPanel Margin="0,0,15,0">
+                    <TextBlock Style="{StaticResource DefaultSummaryHeaderStyle}" Text="Stock Weight" />
+                    <TextBlock Style="{StaticResource DefaultSummaryValueStyle}" Text="{Binding TotalEquitiesStockWeight, StringFormat=P0}" />
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource DefaultSummaryHeaderStyle}" Text="Market Value" />
+                    <TextBlock Style="{StaticResource DefaultSummaryValueStyle}" Text="{Binding TotalEquitiesMarketValue, StringFormat=N2}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,10">
+            <TextBlock Style="{StaticResource SummaryHeaderStyle}" Text="Bonds" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0,0,15,0">
+                    <TextBlock Style="{StaticResource DefaultSummaryHeaderStyle}" Text="Count" />
+                    <TextBlock Style="{StaticResource DefaultSummaryValueStyle}" Text="{Binding TotalBondCount, TargetNullValue=N/A}" />
+                </StackPanel>
+                <StackPanel Margin="0,0,15,0">
+                    <TextBlock Style="{StaticResource DefaultSummaryHeaderStyle}" Text="Stock Weight" />
+                    <TextBlock Style="{StaticResource DefaultSummaryValueStyle}" Text="{Binding TotalBondStockWeight, StringFormat=P0}" />
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource DefaultSummaryHeaderStyle}" Text="Market Value" />
+                    <TextBlock Style="{StaticResource DefaultSummaryValueStyle}" Text="{Binding TotalBondMarketValue, StringFormat=N2}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,0,0,10">
+            <TextBlock Style="{StaticResource SummaryHeaderStyle}" Text="Total" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0,0,15,0">
+                    <TextBlock Style="{StaticResource DefaultSummaryHeaderStyle}" Text="Count" />
+                    <TextBlock Style="{StaticResource DefaultSummaryValueStyle}" Text="{Binding TotalStockCount, TargetNullValue=N/A}" />
+                </StackPanel>
+                <StackPanel Margin="0,0,15,0">
+                    <TextBlock Style="{StaticResource DefaultSummaryHeaderStyle}" Text="Stock Weight" />
+                    <TextBlock Style="{StaticResource DefaultSummaryValueStyle}" Text="{Binding TotalStockWeight, StringFormat=P0}" />
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource DefaultSummaryHeaderStyle}" Text="Market Value" />
+                    <TextBlock Style="{StaticResource DefaultSummaryValueStyle}" Text="{Binding TotalMarketValue, StringFormat=N2}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
